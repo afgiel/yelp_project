@@ -21,7 +21,7 @@ for line in reviewsFile:
 		reviewerID = review['user_id']
 		stars = str(review['stars'])
 		date = review['date']
-		toAdd = ", ".join([reviewerID, businessID, stars, date])
+		toAdd = ",".join([reviewerID, businessID, stars, date])
 		stanfordReviews.add(toAdd)
 
 stanfordFile = open(STANFORD_FILE, "w")
