@@ -7,17 +7,17 @@ Gproj = nx.read_edgelist(PROJ_FILENAME, delimiter=',')
 Gmain = nx.read_edgelist(MAIN_FILENAME, delimiter=',', data=(('rating',int),('date',str)))
 
 # Gmain = nx.Graph()
-# Gmain.add_edge('A','i')
-# Gmain.add_edge('B','i')
-# Gmain.add_edge('B','j')
-# Gmain.add_edge('B','k')
-# Gmain.add_edge('C','i')
-# Gmain.add_edge('C','j')
-# Gmain.add_edge('C','l')
-# Gmain.add_edge('D','j')
-# Gmain.add_edge('D','l')
-# Gmain.add_edge('E','k')
-# Gmain.add_edge('E','l')
+# Gmain.add_edge('A','i', rating = 1)
+# Gmain.add_edge('B','i', rating = 2)
+# Gmain.add_edge('B','j', rating = 1)
+# Gmain.add_edge('B','k', rating = 3)
+# Gmain.add_edge('C','i', rating = 5)
+# Gmain.add_edge('C','j', rating = 4)
+# Gmain.add_edge('C','l', rating = 5)
+# Gmain.add_edge('D','j', rating = 1)
+# Gmain.add_edge('D','l', rating = 4)
+# Gmain.add_edge('E','k', rating = 3)
+# Gmain.add_edge('E','l', rating = 2)
 
 # Gproj = nx.Graph()
 # for edge in Gmain.edges():
@@ -49,6 +49,68 @@ def createDeltaWeight():
 			total += 2.0/(degree * degree-1)
 		weights[(edge[0], edge[1])] = total
 	return weights	
+
+def getRating(user, business):
+	return Gmain[user][business]['rating']
+
+def createRatingSumWeight():
+	weights = dict()
+	for edge in Gproj.edges():
+		total = 0.0
+		intersection = intersects[(edge[0],edge[1])]
+		for common in intersection:
+			user1Rating = getRating(edge[0], common)
+			user2Rating = getRating(edge[1], common)
+			diff = abs(user1Rating - user2Rating)
+			toAdd = float(5-diff)/5
+			total += toAdd
+		weights[(edge[0],edge[1])] = total
+	return weights
+
+def createRatingJaccardWeight():
+	weights = dict()
+	for edge in Gproj.edges():
+		total = 0.0
+		intersection = intersects[(edge[0],edge[1])]
+		for common in intersection:
+			user1Rating = getRating(edge[0], common)
+			user2Rating = getRating(edge[1], common)
+			diff = abs(user1Rating - user2Rating)
+			toAdd = float(5-diff)/5
+			total += toAdd
+		total = total/len(unions[(edge[0], edge[1])])
+		weights[(edge[0],edge[1])] = total
+	return weights
+
+def createRatingDeltaWeight():
+	weights = dict()
+	for edge in Gproj.edges():
+		intersection = intersects[(edge[0],edge[1])]
+		total = 0.0
+		for business in intersection:
+			degree = len(Gmain.edges(business))
+			base = 2.0/(degree * degree-1)
+			user1Rating = getRating(edge[0], business)
+			user2Rating = getRating(edge[1], business)
+			diff = abs(user1Rating - user2Rating)
+			scale = float(5-diff)/5
+			total += base*scale
+		weights[(edge[0], edge[1])] = total
+	return weights	
+
+def createRatingLeastSquareWeight():
+	weights = dict()
+	for edge in Gproj.edges():
+		total = 0.0
+		intersection = intersects[(edge[0],edge[1])]
+		for common in intersection:
+			user1Rating = getRating(edge[0], common)
+			user2Rating = getRating(edge[1], common)
+			diff = abs(user1Rating - user2Rating)
+			toAdd = float(5-diff)/5
+			total += pow(toAdd, 2)
+		weights[(edge[0],edge[1])] = total
+	return weights
 
 def getBusinessNodes(user):
 	userSet = set()
@@ -110,3 +172,26 @@ DELTA_WEIGHTS_FILE = "stanfordProjectionTrain-DeltaWeights.txt"
 print "## WRITING DELTA WEIGHT ##"
 writeToFile(DELTA_WEIGHTS_FILE,deltaWeights)
 
+print "## COMPUTING RATING SUM WEIGHT ##"
+ratingSumWeights = createRatingSumWeight()
+RATING_SUM_WEIGHTS_FILE = "stanfordProjectionTrain-RatingSumWeights.txt"
+print "## WRITING RATING SUM WEIGHT ##"
+writeToFile(RATING_SUM_WEIGHTS_FILE,ratingSumWeights)
+
+print "## COMPUTING RATING JACCARD WEIGHT ##"
+ratingJaccardWeights = createRatingJaccardWeight()
+RATING_JACCARD_WEIGHTS_FILE = "stanfordProjectionTrain-RatingJaccardWeights.txt"
+print "## WRITING RATING JACCARD WEIGHT ##"
+writeToFile(RATING_JACCARD_WEIGHTS_FILE,ratingJaccardWeights)
+
+print "## COMPUTING RATING DELTA WEIGHT ##"
+ratingDeltaWeights = createRatingDeltaWeight()
+RATING_DELTA_WEIGHTS_FILE = "stanfordProjectionTrain-RatingDeltaWeights.txt"
+print "## WRITING RATING DELTA WEIGHT ##"
+writeToFile(RATING_DELTA_WEIGHTS_FILE,ratingDeltaWeights)
+
+print "## COMPUTING RATING LEAST SQUARE WEIGHT ##"
+ratingLeastSquareWeights = createRatingLeastSquareWeight()
+RATING_LEAST_SQUARE_WEIGHTS_FILE = "stanfordProjectionTrain-RatingLeastSquareWeights.txt"
+print "## WRITING RATING LEAST SQUARE WEIGHT ##"
+writeToFile(RATING_LEAST_SQUARE_WEIGHTS_FILE,ratingLeastSquareWeights)
