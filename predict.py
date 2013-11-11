@@ -3,6 +3,7 @@ import networkx as nx
 INTERNAL_LINKS_FILE = "internalLinksTrain.txt"
 PROJ_FILENAME = "stanfordProjectionTrain-SumWeights.txt"
 MAIN_FILENAME = "stanfordTrain.txt"
+PREDICTED_FILE = "stanfordPredicted.txt"
 
 WEIGHT_THRESHOLD = 1
 TOTAL_THRESHOLD = 3
@@ -47,4 +48,7 @@ for key, value in numOverThreshold.items():
 	if value >= TOTAL_THRESHOLD:
 		predicted.add(key)
 
-print predicted
+predictedFile = open(PREDICTED_FILE, "w")
+for item in predicted:
+	predictedFile.write(item[0]+ "," + item[1] + "\n")
+predictedFile.close()
