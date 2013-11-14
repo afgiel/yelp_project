@@ -1,7 +1,7 @@
-STANFORD_FILE = "stanfordEdges.txt"
-PERCENT_TRAIN = .7
-STANFORD_TRAIN = "stanfordTrain.txt" 
-STANFORD_TEST = "stanfordTest.txt"
+STANFORD_FILE = "waterlooEdges.txt"
+PERCENT_TRAIN = .5
+STANFORD_TRAIN = "waterlooTrain.txt" 
+STANFORD_TEST = "waterlooTest.txt"
 
 def writeToFile(filename, data):
 	toWrite = open(filename, "w")

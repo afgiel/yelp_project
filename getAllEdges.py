@@ -9,8 +9,8 @@ print "## GETTING INFO FOR EDGES ##"
 reviewsFile = open(REVIEW_FILE)
 for line in reviewsFile:
 	review = json.loads(line)
-	businessID = review['business_id'] 
-	reviewerID = review['user_id']
+	businessID = "bb" + review['business_id'] 
+	reviewerID = "uu" + review['user_id']
 	stars = str(review['stars'])
 	date = review['date']
 	toAdd = ",".join([reviewerID, businessID, stars, date])

@@ -23,10 +23,25 @@ for edge in G.edges():
 			Gproj.add_edge(userNode,edge[1])
 """
 
-INTERNAL_LINKS_FILE = "internalLinksTrain.txt"
+def getUserAndBusiness(edge):
+	userNode = "test"
+	businessNode = "test"
+	if(edge[0].startswith("uu")):
+		userNode = edge[0]
+	if(edge[0].startswith("bb")):
+		businessNode = edge[0]
+	if(edge[1].startswith("uu")):
+		userNode = edge[1]
+	if(edge[1].startswith("bb")):
+		businessNode = edge[1]
+	if(userNode == "test" or businessNode == "test"):
+		print "ERROR IN GRAPH"
+	return userNode,businessNode
 
-mainFile = ("stanfordTrain.txt")
-projFile = ("stanfordProjectionTrainEdges.txt")
+INTERNAL_LINKS_FILE = "waterlooIL.txt"
+
+mainFile = ("waterlooTrain.txt")
+projFile = ("waterlooProj.txt")
 G = nx.read_edgelist(mainFile, delimiter=',', data=(('rating',int),('date',str)))
 Gproj = nx.read_edgelist(projFile, delimiter=',')
 print "## GRAPH CREATED ##"
@@ -34,8 +49,9 @@ print "## CREATING SET OF NODES ##"
 userNodes = set()
 businessNodes = set()
 for edge in G.edges():
-	userNodes.add(edge[0])
-	businessNodes.add(edge[1])
+	u,b = getUserAndBusiness(edge)
+	userNodes.add(u)
+	businessNodes.add(b)
 print "## CREATED SET OF NODES ##"
 
 print "## FINDING INTERNAL LINKS ##"
@@ -51,7 +67,8 @@ for userNode in userNodes:
 		if not G.has_edge(userNode,businessNode):
 			internalLink = True
 			for edge in G.edges(businessNode):
-				if not Gproj.has_edge(edge[1],userNode):
+				u,b = getUserAndBusiness(edge)
+				if not Gproj.has_edge(u,userNode):
 					internalLink = False
 					break
 			if internalLink:

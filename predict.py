@@ -1,12 +1,12 @@
 import networkx as nx 
 
 INTERNAL_LINKS_FILE = "internalLinksTrain.txt"
-PROJ_FILENAME = "stanfordProjectionTrain-SumWeights.txt"
-MAIN_FILENAME = "stanfordTrain.txt"
-PREDICTED_FILE = "stanfordPredicted.txt"
+PROJ_FILENAME = "waterlooProj-SumWeights.txt"
+MAIN_FILENAME = "waterlooTrain.txt"
+PREDICTED_FILE = "waterlooPredicted.txt"
 
 WEIGHT_THRESHOLD = 1
-TOTAL_THRESHOLD = 1
+TOTAL_THRESHOLD = 3
 
 Gproj = nx.read_edgelist(PROJ_FILENAME, delimiter=',', data=(('rating',float),))
 Gmain = nx.read_edgelist(MAIN_FILENAME, delimiter=',', data=(('rating',int),('date',str)))

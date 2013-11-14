@@ -1,7 +1,22 @@
 import networkx as nx
 
-PROJ_FILENAME = "stanfordProjectionTrainEdges.txt"
-MAIN_FILENAME = "stanfordTrain.txt"
+PROJ_FILENAME = "waterlooProj.txt"
+MAIN_FILENAME = "waterlooTrain.txt"
+
+def getUserAndBusiness(edge):
+	userNode = "test"
+	businessNode = "test"
+	if(edge[0].startswith("uu")):
+		userNode = edge[0]
+	if(edge[0].startswith("bb")):
+		businessNode = edge[0]
+	if(edge[1].startswith("uu")):
+		userNode = edge[1]
+	if(edge[1].startswith("bb")):
+		businessNode = edge[1]
+	if(userNode == "test" or businessNode == "test"):
+		print "ERROR IN GRAPH"
+	return userNode,businessNode
 
 Gproj = nx.read_edgelist(PROJ_FILENAME, delimiter=',')
 Gmain = nx.read_edgelist(MAIN_FILENAME, delimiter=',', data=(('rating',int),('date',str)))
@@ -51,6 +66,8 @@ def createDeltaWeight():
 	return weights	
 
 def getRating(user, business):
+	print user
+	print business
 	return Gmain[user][business]['rating']
 
 def createRatingSumWeight():
@@ -58,6 +75,9 @@ def createRatingSumWeight():
 	for edge in Gproj.edges():
 		total = 0.0
 		intersection = intersects[(edge[0],edge[1])]
+		print edge[0]
+		print edge[1]
+		print intersection
 		for common in intersection:
 			user1Rating = getRating(edge[0], common)
 			user2Rating = getRating(edge[1], common)
@@ -115,7 +135,8 @@ def createRatingLeastSquareWeight():
 def getBusinessNodes(user):
 	userSet = set()
 	for review in Gmain.edges(user):
-			userSet.add(review[1])
+		u,b = getUserAndBusiness(edge)
+		userSet.add(b)
 	return userSet
 
 def writeToFile(name,weights):
@@ -144,8 +165,9 @@ print "## CREATING SET OF NODES ##"
 userNodes = set()
 businessNodes = set()
 for edge in Gmain.edges():
-       userNodes.add(edge[0])
-       businessNodes.add(edge[1])
+	u,b = getUserAndBusiness(edge)
+	userNodes.add(u)
+	businessNodes.add(b)
 print "## CREATED SET OF NODES ##"
 
 intersects = dict()
@@ -156,42 +178,42 @@ computeIntersectionAndUnion()
 
 print "## COMPUTING SUM WEIGHT ##"
 sumWeights = createSumWeight()
-SUM_WEIGHTS_FILE = "stanfordProjectionTrain-SumWeights.txt"
+SUM_WEIGHTS_FILE = "waterlooProj-SumWeights.txt"
 print "## WRITING SUM WEIGHT ##"
 writeToFile(SUM_WEIGHTS_FILE,sumWeights)
 
 print "## COMPUTING JACCARD WEIGHT ##"
 jaccardWeights = createJaccardWeight()
-JACCARD_WEIGHTS_FILE = "stanfordProjectionTrain-JaccardWeights.txt"
+JACCARD_WEIGHTS_FILE = "waterlooProj-JaccardWeights.txt"
 print "## WRITING JACCARD WEIGHT ##"
 writeToFile(JACCARD_WEIGHTS_FILE,jaccardWeights)
 
 print "## COMPUTING DELTA WEIGHT ##"
 deltaWeights = createDeltaWeight()
-DELTA_WEIGHTS_FILE = "stanfordProjectionTrain-DeltaWeights.txt"
+DELTA_WEIGHTS_FILE = "waterlooProj-DeltaWeights.txt"
 print "## WRITING DELTA WEIGHT ##"
 writeToFile(DELTA_WEIGHTS_FILE,deltaWeights)
 
 print "## COMPUTING RATING SUM WEIGHT ##"
 ratingSumWeights = createRatingSumWeight()
-RATING_SUM_WEIGHTS_FILE = "stanfordProjectionTrain-RatingSumWeights.txt"
+RATING_SUM_WEIGHTS_FILE = "waterlooProj-RatingSumWeights.txt"
 print "## WRITING RATING SUM WEIGHT ##"
 writeToFile(RATING_SUM_WEIGHTS_FILE,ratingSumWeights)
 
 print "## COMPUTING RATING JACCARD WEIGHT ##"
 ratingJaccardWeights = createRatingJaccardWeight()
-RATING_JACCARD_WEIGHTS_FILE = "stanfordProjectionTrain-RatingJaccardWeights.txt"
+RATING_JACCARD_WEIGHTS_FILE = "waterlooProj-RatingJaccardWeights.txt"
 print "## WRITING RATING JACCARD WEIGHT ##"
 writeToFile(RATING_JACCARD_WEIGHTS_FILE,ratingJaccardWeights)
 
 print "## COMPUTING RATING DELTA WEIGHT ##"
 ratingDeltaWeights = createRatingDeltaWeight()
-RATING_DELTA_WEIGHTS_FILE = "stanfordProjectionTrain-RatingDeltaWeights.txt"
+RATING_DELTA_WEIGHTS_FILE = "waterlooProj-RatingDeltaWeights.txt"
 print "## WRITING RATING DELTA WEIGHT ##"
 writeToFile(RATING_DELTA_WEIGHTS_FILE,ratingDeltaWeights)
 
 print "## COMPUTING RATING LEAST SQUARE WEIGHT ##"
 ratingLeastSquareWeights = createRatingLeastSquareWeight()
-RATING_LEAST_SQUARE_WEIGHTS_FILE = "stanfordProjectionTrain-RatingLeastSquareWeights.txt"
+RATING_LEAST_SQUARE_WEIGHTS_FILE = "waterlooProj-RatingLeastSquareWeights.txt"
 print "## WRITING RATING LEAST SQUARE WEIGHT ##"
 writeToFile(RATING_LEAST_SQUARE_WEIGHTS_FILE,ratingLeastSquareWeights)
