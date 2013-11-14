@@ -1,0 +1,7 @@
+Number of Businesses: 13415
+Number of Nodes: 144288
+Number of Edges: 330071
+Number of Users: 130873
+Alpha : 2.58949732516
+Number of Weakly Connected Components: 728
+Number of Strongly Connected Components: 144288
