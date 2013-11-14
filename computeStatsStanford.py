@@ -38,12 +38,18 @@ for node in G:
 		numBusiness += 1
 		inDegree = G.in_degree(node)
 		businessDegreeDist[inDegree] += 1
-		rawDegrees.append(inDegree)
+		if inDegree > 1: rawDegrees.append(inDegree)
 
-plt.loglog(userDegreeDist.keys(), userDegreeDist.values(), marker='o', linestyle = 'None')
+plt.title("User Degree Distribution")
+plt.xlabel("Degree")
+plt.ylabel("Number of Users with Degree")
+plt.loglog(userDegreeDist.keys(), userDegreeDist.values(), marker='o', linestyle = 'None', color='r')
 plt.show()
 
-plt.loglog(businessDegreeDist.keys(), businessDegreeDist.values(), marker='o', linestyle = 'None')
+plt.title("Business Degree Distribution")
+plt.xlabel("Degree")
+plt.ylabel("Number of Businesses with Degree")
+plt.loglog(businessDegreeDist.keys(), businessDegreeDist.values(), marker='o', linestyle = 'None', color='r')
 plt.show()
 
 stats["Number of Businesses: "] = numBusiness
@@ -60,6 +66,25 @@ for i in range(n):
 		totalSum += toAdd
 alpha = 1 + n*(1.0/totalSum)
 stats["Alpha : "] = alpha
+
+print "## COMPUTING WEIGHT DIST ##"
+
+total = 0
+weights = collections.Counter()
+
+for edge in G.edges():
+	weight = G[edge[0]][edge[1]]['rating']
+	total += weight
+	weights[weight] += 1
+
+plt.title("Weight Distribution")
+plt.xlabel("Rating")
+plt.ylabel("Number of Reviews with Rating")
+plt.plot(weights.keys(), weights.values(), marker='o', color ='r')
+plt.show()
+
+avgWeight = float(total)/G.size()
+stats["Average Rating: "] = avgWeight
 
 print "## WRITING STATS ##"
 statsFile = open(STANFORD_STATS_FILE, "w")
