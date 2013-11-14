@@ -6,7 +6,7 @@ MAIN_FILENAME = "stanfordTrain.txt"
 PREDICTED_FILE = "stanfordPredicted.txt"
 
 WEIGHT_THRESHOLD = 1
-TOTAL_THRESHOLD = 3
+TOTAL_THRESHOLD = 1
 
 Gproj = nx.read_edgelist(PROJ_FILENAME, delimiter=',', data=(('rating',float),))
 Gmain = nx.read_edgelist(MAIN_FILENAME, delimiter=',', data=(('rating',int),('date',str)))
