@@ -1,8 +1,9 @@
 Number of Businesses: 499
+Business Alpha : 1.44466472408
 Average Rating: 3.61613508443
 Number of Nodes: 10225
 Number of Edges: 15990
+User Alpha : 4.70872158451
 Number of Users: 9726
-Alpha : 3.74993666914
 Number of Weakly Connected Components: 47
 Clustering Coefficient: 0.0

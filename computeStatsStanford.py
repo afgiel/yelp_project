@@ -22,7 +22,8 @@ stats["Number of Weakly Connected Components: "] = nx.number_weakly_connected_co
 
 userDegreeDist = collections.Counter()
 businessDegreeDist = collections.Counter()
-rawDegrees = list()
+uRawDegrees = list()
+bRawDegrees = list()
 
 numBusiness = 0
 numUser = 0
@@ -33,12 +34,12 @@ for node in G:
 	if outDegree != 0: 
 		numUser += 1
 		userDegreeDist[outDegree] += 1
-		rawDegrees.append(outDegree)
+		uRawDegrees.append(outDegree)
 	else: 
 		numBusiness += 1
 		inDegree = G.in_degree(node)
 		businessDegreeDist[inDegree] += 1
-		if inDegree > 1: rawDegrees.append(inDegree)
+		if inDegree > 1: bRawDegrees.append(inDegree)
 
 plt.title("User Degree Distribution")
 plt.xlabel("Degree")
@@ -56,16 +57,27 @@ stats["Number of Businesses: "] = numBusiness
 stats["Number of Users: "] = numUser
 
 print "## ESTIMATING ALPHA VIA MLE ##"
-n = len(rawDegrees)
+n = len(uRawDegrees)
 xMin = 1
 totalSum = 0.0
 for i in range(n):
-	di = rawDegrees[i]
+	di = uRawDegrees[i]
 	if di > 1:
 		toAdd = (math.log((di)/xMin))
 		totalSum += toAdd
 alpha = 1 + n*(1.0/totalSum)
-stats["Alpha : "] = alpha
+stats["User Alpha : "] = alpha
+
+n = len(bRawDegrees)
+xMin = 1
+totalSum = 0.0
+for i in range(n):
+	di = bRawDegrees[i]
+	if di > 1:
+		toAdd = (math.log((di)/xMin))
+		totalSum += toAdd
+alpha = 1 + n*(1.0/totalSum)
+stats["Business Alpha : "] = alpha
 
 print "## COMPUTING WEIGHT DIST ##"
 
