@@ -11,14 +11,14 @@ businessFile = open(BUSINESS_FILE)
 for line in businessFile:
 	business = json.loads(line)
 	if "Stanford University" in business['schools']: 
-		stanfordBusinesses.add(business['business_id'])
+		stanfordBusinesses.add("bb" + business['business_id'])
 
 reviewsFile = open(REVIEW_FILE)
 for line in reviewsFile:
 	review = json.loads(line)
-	businessID = review['business_id'] 
+	businessID = "bb" + review['business_id'] 
 	if businessID in stanfordBusinesses:
-		reviewerID = review['user_id']
+		reviewerID = "uu" + review['user_id']
 		stars = str(review['stars'])
 		date = review['date']
 		toAdd = ",".join([reviewerID, businessID, stars, date])
