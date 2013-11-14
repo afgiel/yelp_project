@@ -1,4 +1,4 @@
-B,l
 C,k
-D,k
+B,l
 E,j
+D,k

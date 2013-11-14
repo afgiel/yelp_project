@@ -13,12 +13,20 @@ G.add_edge('D','j')
 G.add_edge('D','l')
 G.add_edge('E','k')
 G.add_edge('E','l')
+
+Gproj = nx.Graph()
+for edge in G.edges():
+	userNode = edge[0]
+	businessNode = edge[1]
+	for edge in G.edges(businessNode):
+		if(edge[1]!=userNode):
+			Gproj.add_edge(userNode,edge[1])
 """
 
-INTERNAL_LINKS_FILE = "internalLinks.txt"
+INTERNAL_LINKS_FILE = "internalLinksTrain.txt"
 
-mainFile = ("stanfordEdges.txt")
-projFile = ("stanfordProjectionEdges.txt")
+mainFile = ("stanfordTrain.txt")
+projFile = ("stanfordProjectionTrainEdges.txt")
 G = nx.read_edgelist(mainFile, delimiter=',', data=(('rating',int),('date',str)))
 Gproj = nx.read_edgelist(projFile, delimiter=',')
 print "## GRAPH CREATED ##"

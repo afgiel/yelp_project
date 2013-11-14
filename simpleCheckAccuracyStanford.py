@@ -20,5 +20,5 @@ for line in testFile:
 numberWrong = predicted - actual
 numberRight = predicted & actual
 print "NUMBER GUESSED: %d" % len(predicted)
-print "NUMBER RIGHT: %d" % numberRight
-print "NUMBER WRONG: %d" % numberWrong
+print "NUMBER RIGHT: %d" % len(numberRight)
+print "NUMBER WRONG: %d" % len(numberWrong)

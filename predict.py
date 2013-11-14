@@ -10,7 +10,7 @@ TOTAL_THRESHOLD = 1
 
 Gproj = nx.read_edgelist(PROJ_FILENAME, delimiter=',', data=(('rating',float),))
 Gmain = nx.read_edgelist(MAIN_FILENAME, delimiter=',', data=(('rating',int),('date',str)))
-
+print "## CREATED GRAPHS ##"
 # Gmain = nx.Graph()
 # Gmain.add_edge('A','i', rating = 1)
 # Gmain.add_edge('B','i', rating = 2)
@@ -30,11 +30,20 @@ def getWeight(user1, user2):
 numOverThreshold = dict()
 internalLinks = open(INTERNAL_LINKS_FILE)
 # internalLinks = open("testInternalLinks.txt")
+print "## OPENED GRAPHS ##"
+nodes = Gmain.nodes()
+
+userNodes = set()
+businessNodes = set()
+for edge in Gmain.edges():
+	userNodes.add(edge[0])
+	businessNodes.add(edge[1])
+
 
 for line in internalLinks:
 	internalLink = line.split(',')
 	userNode = internalLink[0]
-	businessNode = internalLink[1]
+	businessNode = internalLink[1].rstrip()
 	total = 0
 	for edge in Gmain.edges(businessNode):
 		if edge[1] != userNode:
