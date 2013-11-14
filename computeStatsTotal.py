@@ -17,7 +17,6 @@ print "## COMPUTING STATS ##"
 stats["Number of Edges: "]= G.size()
 stats["Number of Nodes: "] = len(G)
 # stats["Clustering Coefficient: "] = nx.bipartite.average_clustering(G) 
-stats["Number of Strongly Connected Components: "] = nx.number_strongly_connected_components(G)
 stats["Number of Weakly Connected Components: "] = nx.number_weakly_connected_components(G)
 
 userDegreeDist = collections.Counter()
