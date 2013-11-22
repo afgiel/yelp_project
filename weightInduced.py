@@ -66,8 +66,6 @@ def createDeltaWeight():
 	return weights	
 
 def getRating(user, business):
-	print user
-	print business
 	return Gmain[user][business]['rating']
 
 def createRatingSumWeight():
@@ -75,9 +73,6 @@ def createRatingSumWeight():
 	for edge in Gproj.edges():
 		total = 0.0
 		intersection = intersects[(edge[0],edge[1])]
-		print edge[0]
-		print edge[1]
-		print intersection
 		for common in intersection:
 			user1Rating = getRating(edge[0], common)
 			user2Rating = getRating(edge[1], common)
@@ -135,7 +130,7 @@ def createRatingLeastSquareWeight():
 def getBusinessNodes(user):
 	userSet = set()
 	for review in Gmain.edges(user):
-		u,b = getUserAndBusiness(edge)
+		u,b = getUserAndBusiness(review)
 		userSet.add(b)
 	return userSet
 

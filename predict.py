@@ -1,6 +1,6 @@
 import networkx as nx 
 
-INTERNAL_LINKS_FILE = "internalLinksTrain.txt"
+INTERNAL_LINKS_FILE = "waterlooIL.txt"
 PROJ_FILENAME = "waterlooProj-SumWeights.txt"
 MAIN_FILENAME = "waterlooTrain.txt"
 PREDICTED_FILE = "waterlooPredicted.txt"
