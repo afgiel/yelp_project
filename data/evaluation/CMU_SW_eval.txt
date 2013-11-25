@@ -1,0 +1,19 @@
+Num Predicted Edges,4104
+Num Predicted Edges In Test,0
+Num Predicted Edges Not In Test,4104
+Num Test Edges In Predicted,0
+Num Test Edges Not In Predicted,3604
+Num Test Edges In Train,3604
+Num Test Edges Not In Train,0
+Num Train Users,1270
+Num Test Users,1270
+Num Predicted Users,363
+Num Train Businesses,404
+Num Test Businesses,404
+Num Predicted Businesses,133
+Num Train Users In Test,1270
+Num Train Businesses In Test,133
+Num Predicted Users In Train,363
+Num Predicted Businesses In Train,133
+Num Predicted Users In Test,363
+Num Predicted Businesses In Test,133
