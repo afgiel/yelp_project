@@ -1,0 +1,29 @@
+Brown University,BRO
+California Institute of Technology,CIT
+California Polytechnic State University,CPS
+Carnegie Mellon University,CMU
+Columbia University,COL
+Cornell University,COR
+Georgia Institute of Technology,GIT
+Harvard University,HAR
+Harvey Mudd College,HMC
+Massachusetts Institute of Technology,MIT
+Princeton University,PRC
+Purdue University,PUR
+Rensselaer Polytechnic Institute,RPI
+Rice University,RIC
+Stanford University,STA
+University of California - Los Angeles,UCL
+University of California - San Diego,UCS
+University of California at Berkeley,UCB
+University of Illinois - Urbana-Champaign,UIC
+University of Maryland - College Park,UMC
+University of Massachusetts - Amherst,UMA
+University of Michigan - Ann Arbor,UMI
+University of North Carolina - Chapel Hill,UNC
+University of Pennsylvania,UPN
+University of Southern California,USC
+University of Texas - Austin,UTA
+University of Washington,UWS
+University of Waterloo,UWA
+Virginia Tech,VIR
