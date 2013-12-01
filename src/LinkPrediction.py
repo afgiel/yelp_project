@@ -80,7 +80,7 @@ def predictLinksWeighted(acronym,acronymw,verbose,weightThresh,totalThresh):
 		for edge in Gmain.edges(businessNode):
 			if edge[1] != userNode:
 				weight = getWeight(userNode, edge[1])
-				if weight > weightThresh:
+				if weight >= weightThresh:
 					total += 1
 		numOverThreshold[(userNode, businessNode)] = total
 	if(verbose): print "## %s - Weight: %s - GENERATED POSSIBLE LINKS ##\n"%(acronym,acronymw)
