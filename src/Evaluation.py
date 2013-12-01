@@ -153,7 +153,7 @@ def evaluateWeighted(acronym,acronymw,verbose):
 		recall = -1.0
 	else:
 		recall = float(len(testInternalLinks & predictedLinks))/len(testInternalLinks)
-	
+
 	if(verbose): print "## %s - Weight: %s - WRITING TO EVALUATION FILE ##\n"%(acronym,acronymw)
 	toWrite = "Num Predicted Edges," + str(len(predictedLinks)) + "\n"
 	toWrite = toWrite + "Num Predicted Edges In Test," + str(numPredictedInTest) + "\n"

@@ -18,8 +18,9 @@ MODULE_SPLIT_DATA = False
 MODULE_PROJECTION_GRAPH = False
 MODULE_WEIGHTED_PROJECTION_GRAPH = False
 MODULE_INTERNAL_LINKS = False
-MODULE_LINK_PREDICTION = True
-MODULE_EVALUATION = True
+MODULE_LINK_PREDICTION = False
+MODULE_EVALUATION = False
+MODULE_FIND_THRESHOLD = True
 
 # SCHOOLS TO BE USED
 ALL_SCHOOLS = False
@@ -48,6 +49,7 @@ from InternalLinks import generateInternalLinks
 from LinkPrediction import predictLinks
 from SchoolEdges import getReviews
 from Evaluation import evaluate
+from FindThreshold import findThresholds
 
 """
 ######################################################################################
@@ -101,19 +103,27 @@ if(MODULE_INTERNAL_LINKS):
 		if(ALL_SCHOOLS or school in SCHOOLS):
 			generateInternalLinks(school_acronyms[school],VERBOSE)
 	print "#############################################################\n"
-	
-if(MODULE_LINK_PREDICTION):
+
+if(MODULE_FIND_THRESHOLD):
 	print "#############################################################"
-	print "## PREDICTING LINKS ##\n"
+	print "## FINDING THRESHOLDS ##\n"
 	for school in schools:
 		if(ALL_SCHOOLS or school in SCHOOLS):
-			predictLinks(school_acronyms[school],VERBOSE,WEIGHT_THRESHOLD,TOTAL_THRESHOLD)
+			findThresholds(school_acronyms[school],VERBOSE)
 	print "#############################################################\n"
-	
-if(MODULE_EVALUATION):
-	print "#############################################################"
-	print "## EVALUATING ##\n"
-	for school in schools:
-		if(ALL_SCHOOLS or school in SCHOOLS):
-			evaluate(school_acronyms[school],VERBOSE)
-	print "#############################################################\n"
+else:
+	if(MODULE_LINK_PREDICTION):
+		print "#############################################################"
+		print "## PREDICTING LINKS ##\n"
+		for school in schools:
+			if(ALL_SCHOOLS or school in SCHOOLS):
+				predictLinks(school_acronyms[school],VERBOSE,WEIGHT_THRESHOLD,TOTAL_THRESHOLD)
+		print "#############################################################\n"
+		
+	if(MODULE_EVALUATION):
+		print "#############################################################"
+		print "## EVALUATING ##\n"
+		for school in schools:
+			if(ALL_SCHOOLS or school in SCHOOLS):
+				evaluate(school_acronyms[school],VERBOSE)
+		print "#############################################################\n"
