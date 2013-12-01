@@ -22,6 +22,7 @@ PREDICTED_PATH = "../data/predicted/"
 TEST_PATH = "../data/test/"
 TRAIN_PATH = "../data/train/"
 EVAL_PATH = "../data/evaluation/"
+INTERNAL_LINKS_PATH = "../data/internal_links/"
 
 """
 ######################################################################################
@@ -132,7 +133,26 @@ def evaluateWeighted(acronym,acronymw,verbose):
 			numTestInTrain = numTestInTrain + 1
 		else:
 			numTestNotInTrain = numTestNotInTrain + 1
-	
+
+	allInternalLinks = set()
+	internalLinksFile = open(INTERNAL_LINKS_PATH + acronym + "_il.txt")
+	for line in internalLinksFile:
+		edge = line.split(',')
+		allInternalLinks.add((edge[0], edge[1].rstrip()))
+	testInternalLinks = set()
+	for edge in Gtest.edges(): 
+		u,b = getUserAndBusiness(edge)
+		if (u, b) in allInternalLinks:
+			testInternalLinks.add((u, b))
+
+	if len(predictedLinks) == 0: 
+		precision = -1.0
+	else:
+		precision = float(len(testInternalLinks & predictedLinks))/len(predictedLinks)
+	if len(testInternalLinks) == 0:
+		recall = -1.0
+	else:
+		recall = float(len(testInternalLinks & predictedLinks))/len(testInternalLinks)
 	
 	if(verbose): print "## %s - Weight: %s - WRITING TO EVALUATION FILE ##\n"%(acronym,acronymw)
 	toWrite = "Num Predicted Edges," + str(len(predictedLinks)) + "\n"
@@ -154,7 +174,11 @@ def evaluateWeighted(acronym,acronymw,verbose):
 	toWrite = toWrite + "Num Predicted Businesses In Train," + str(numPredictedBusinessesInTrain) + "\n"
 	toWrite = toWrite + "Num Predicted Users In Test," + str(numPredictedUsersInTest) + "\n"
 	toWrite = toWrite + "Num Predicted Businesses In Test," + str(numPredictedBusinessesInTest) + "\n"
-	
+	toWrite = toWrite + "Num Test Internal Edges," + str(len(testInternalLinks)) + "\n"
+	toWrite = toWrite + "Num Actual Predicted Internal Edges," + str(len(testInternalLinks & predictedLinks)) + "\n"
+	toWrite = toWrite + "Precision," + str(precision) + "\n"
+	toWrite = toWrite + "Recall," + str(recall) + "\n"
+
 	evalFile = open(EVAL_PATH + acronym + "_" + acronymw + "_eval.txt",'w')
 	evalFile.write(toWrite)
 	evalFile.close()
