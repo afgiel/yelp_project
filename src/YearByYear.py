@@ -31,7 +31,7 @@ def runForThreshold(weightThreshold):
 			TCount[weightAcr] += T
 			PCount[weightAcr] += P
 
-	print "RESULTS FOR %d YEAR BY YEAR" % (ACRONYM)
+	print "RESULTS FOR %s YEAR BY YEAR" % (ACRONYM)
 	for weightAcr in TintPCount:
 		TintP = TintPCount[weightAcr]
 		T = TCount[weightAcr]
