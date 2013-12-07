@@ -41,38 +41,41 @@ def findThresholds(acronym, verbose):
 """
 
 def tryThresholds(acronym, verbose):
-	precisionDict = dict()
-	recallDict = dict()
-	weightThresholds = [x*.1 for x in range(1, 30)]
+	weightThresholds = [x*.01 for x in range(1, 100)]
 	totalThresholds = [1, 2, 3]
 	for weightThreshold in weightThresholds:
 		for totalThreshold in totalThresholds:
+			recall = None
+			precision = None
 			predictLinks(acronym,verbose,weightThreshold,1)
 			evaluate(acronym,verbose)
 			weights,acronyms = getWeights()
 			for weight in weights:
-				if acronyms[weight] not in precisionDict: precisionDict[acronyms[weight]] = dict()
-				if acronyms[weight] not in recallDict: recallDict[acronyms[weight]] = dict()
 				evalFile = open(EVAL_PATH + acronym + "_" + acronyms[weight] + "_eval.txt")
 				for line in evalFile:
 					stat, val = line.split(",")
 					if stat == PRECISION:
-						precisionDict[acronyms[weight]][(weightThreshold,totalThreshold)] = float(val)
+						precision = float(val)
 					if stat == RECALL:
-						recallDict[acronyms[weight]][(weightThreshold,totalThreshold)] = float(val)
-
-	weights,acronyms = getWeights()
-	for weight in weights:
-		if(verbose): print "## %s - Weight: %s - WRITING TO THRESHOLD TRAINING FILE ##\n"%(acronym,acronyms[weight])
-		thresholdTrain = open(THRESHOLD_TRAINING_PATH + acronym + "_" + acronyms[weight] + "_thresh_train.txt", "w")
-		toWrite = ""
-		for weightThreshold in weightThresholds:
-			for totalThreshold in totalThresholds:
-				thresholds = (weightThreshold, totalThreshold)
-				precision = precisionDict[acronyms[weight]][thresholds]
-				recall = recallDict[acronyms[weight]][thresholds]
-				toWrite += str(thresholds[0]) + "," + str(thresholds[1]) + "," + str(precision) + "," + str(recall) + "\n"
-		thresholdTrain.write(toWrite)
+						recall = float(val)
+				evalFile.close()
+				if(verbose): print "## %s - Weight: %s - WRITING TO THRESHOLD TRAINING FILE ##\n"%(acronym,acronyms[weight])
+				thresholdTrain = open(THRESHOLD_TRAINING_PATH + acronym + "_" + acronyms[weight] + "_thresh_train.txt", "a")
+				toWrite = str(weightThreshold) + "," + str(1) + "," + str(precision) + "," + str(recall) + "\n"
+				thresholdTrain.write(toWrite)
+				thresholdTrain.close()
+	#weights,acronyms = getWeights()
+	#for weight in weights:
+	#	if(verbose): print "## %s - Weight: %s - WRITING TO THRESHOLD TRAINING FILE ##\n"%(acronym,acronyms[weight])
+	#	thresholdTrain = open(THRESHOLD_TRAINING_PATH + acronym + "_" + acronyms[weight] + "_thresh_train.txt", "w")
+	#	toWrite = ""
+	#	for weightThreshold in weightThresholds:
+	#		for totalThreshold in totalThresholds:
+	#			thresholds = (weightThreshold, totalThreshold)
+	#			precision = precisionDict[acronyms[weight]][thresholds]
+	#			recall = recallDict[acronyms[weight]][thresholds]
+	#			toWrite += str(thresholds[0]) + "," + str(thresholds[1]) + "," + str(precision) + "," + str(recall) + "\n"
+	#	thresholdTrain.write(toWrite)
 
 
 
