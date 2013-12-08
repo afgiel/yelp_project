@@ -50,7 +50,7 @@ def runForThreshold(weightThreshold):
 		print "P: %f" % precision
 		writeTrainingtoFile(weightAcr, weightThreshold, recall, precision)
 
-weightThresholds = [x*.1 for x in range(1, 6)]
+weightThresholds = [x*.1 for x in range(6, 51)]
 for weightThreshold in weightThresholds:
 	print "TRAINING ON WEIGHT THRESHOLD %f" % weightThreshold
 	runForThreshold(weightThreshold)
