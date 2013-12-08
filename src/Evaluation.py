@@ -133,7 +133,8 @@ def evaluateWeighted(acronym,acronymw,verbose):
 			numTestInTrain = numTestInTrain + 1
 		else:
 			numTestNotInTrain = numTestNotInTrain + 1
-
+	
+	if(verbose): print "## %s - Weight: %s - CALCULATING PRECISION AND RECALL ##\n"%(acronym,acronymw)
 	allInternalLinks = set()
 	internalLinksFile = open(INTERNAL_LINKS_PATH + acronym + "_il.txt")
 	for line in internalLinksFile:

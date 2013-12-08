@@ -14,6 +14,7 @@ def writeOutYearData(acronym, year, yearReviews):
 
 def splitByYear(acronym, reviews):
 	currYear = None
+	currMonth = None
 	currYearData = list()
 	for review in reviews:
 		date = review[3]

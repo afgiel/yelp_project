@@ -41,8 +41,8 @@ def findThresholds(acronym, verbose):
 """
 
 def tryThresholds(acronym, verbose):
-	weightThresholds = [x*.01 for x in range(1, 100)]
-	totalThresholds = [1, 2, 3]
+	weightThresholds = [x*.1 for x in range(1, 10)]
+	totalThresholds = [1]
 	for weightThreshold in weightThresholds:
 		for totalThreshold in totalThresholds:
 			recall = None
