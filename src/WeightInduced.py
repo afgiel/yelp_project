@@ -110,7 +110,7 @@ def createRatingSumWeight():
 			user1Rating = getRating(edge[0], common)
 			user2Rating = getRating(edge[1], common)
 			diff = abs(user1Rating - user2Rating)
-			toAdd = float(5-diff)/5
+			toAdd = float(5-diff)#/5
 			total += toAdd
 		weights[(edge[0],edge[1])] = total
 	return weights
@@ -124,7 +124,7 @@ def createRatingJaccardWeight():
 			user1Rating = getRating(edge[0], common)
 			user2Rating = getRating(edge[1], common)
 			diff = abs(user1Rating - user2Rating)
-			toAdd = float(5-diff)/5
+			toAdd = float(5-diff)#/5
 			total += toAdd
 		total = total/len(unions[(edge[0], edge[1])])
 		weights[(edge[0],edge[1])] = total
@@ -141,7 +141,7 @@ def createRatingDeltaWeight():
 			user1Rating = getRating(edge[0], business)
 			user2Rating = getRating(edge[1], business)
 			diff = abs(user1Rating - user2Rating)
-			scale = float(5-diff)/5
+			scale = float(5-diff)#/5
 			total += base*scale
 		weights[(edge[0], edge[1])] = total
 	return weights	
@@ -155,7 +155,7 @@ def createRatingLeastSquareWeight():
 			user1Rating = getRating(edge[0], common)
 			user2Rating = getRating(edge[1], common)
 			diff = abs(user1Rating - user2Rating)
-			toAdd = float(5-diff)/5
+			toAdd = float(5-diff)#/5
 			total += pow(toAdd, 2)
 		weights[(edge[0],edge[1])] = total
 	return weights
