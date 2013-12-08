@@ -50,7 +50,6 @@ def runForThreshold(weightThreshold):
 					pre,rec = evalStats[weightAcr]
 					Precision[(trainYear,trainMonth,weightAcr)] = pre
 					Recall[(trainYear,trainMonth,weightAcr)] = rec
-
 	print Precision
 
 	print "RESULTS FOR %s MONTH BY MONTH" % (ACRONYM)
