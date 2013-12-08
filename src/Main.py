@@ -17,14 +17,15 @@ MODULE_GET_EDGES = False
 MODULE_SPLIT_DATA = False
 MODULE_PROJECTION_GRAPH = False
 MODULE_WEIGHTED_PROJECTION_GRAPH = False
-MODULE_INTERNAL_LINKS = False
+MODULE_INTERNAL_LINKS = True
 MODULE_LINK_PREDICTION = False
 MODULE_EVALUATION = False
-MODULE_FIND_THRESHOLD = True
+MODULE_FIND_THRESHOLD = False
+MODULE_RATING_PREDICTION = True
 
 # SCHOOLS TO BE USED
-ALL_SCHOOLS = False
-SCHOOLS = ['Carnegie Mellon University']
+ALL_SCHOOLS = True
+SCHOOLS = ['Stanford University']
 
 # TRAIN, VALIDATION AND TEST PERCENT
 PERCENT_TRAIN = .5
@@ -47,6 +48,7 @@ from ProjectionGraph import generateProjectionGraph
 from WeightInduced import generateWeightedProjectionGraph
 from InternalLinks import generateInternalLinks
 from LinkPrediction import predictLinks
+from RatingPrediction import predictRatings
 from SchoolEdges import getReviews
 from Evaluation import evaluate
 from FindThreshold import findThresholds
@@ -127,3 +129,11 @@ else:
 			if(ALL_SCHOOLS or school in SCHOOLS):
 				evaluate(school_acronyms[school],VERBOSE)
 		print "#############################################################\n"
+		
+if(MODULE_RATING_PREDICTION):
+	print "#############################################################"
+	print "## PREDICTING RATINGS ##\n"
+	for school in schools:
+		if(ALL_SCHOOLS or school in SCHOOLS):
+			predictRatings(school_acronyms[school],VERBOSE)
+	print "#############################################################\n"
