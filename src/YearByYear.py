@@ -11,10 +11,7 @@ def writeTrainingtoFile(weightAcr, weightThreshold, recall, precision):
 	print "WRITING RESULTS TO FILE FOR %s %s YEAR BY YEAR" % (ACRONYM, weightAcr)
 	toWrite = (weightThreshold, precision, recall)
 	thresholdTrainFile = None
-	try: 
-		thresholdTrainFile = open(THRESH_TRAINING_PATH + ACRONYM + "_" + weightAcr + "_TRAINING.txt", "a")
-	except: 
-		thresholdTrainFile = open(THRESH_TRAINING_PATH + ACRONYM + "_" + weightAcr + "_TRAINING.txt", "w")
+	thresholdTrainFile = open(THRESH_TRAINING_PATH + ACRONYM + "_" + weightAcr + "_TRAINING.txt", "a+")
 	thresholdTrainFile.write(str(toWrite) + "\n")
 	thresholdTrainFile.close()
 
