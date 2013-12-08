@@ -60,7 +60,7 @@ def tryThresholds(acronym, verbose):
 						recall = float(val)
 				evalFile.close()
 				if(verbose): print "## %s - Weight: %s - WRITING TO THRESHOLD TRAINING FILE ##\n"%(acronym,acronyms[weight])
-				thresholdTrain = open(THRESHOLD_TRAINING_PATH + acronym + "_" + acronyms[weight] + "_thresh_train.txt", "a")
+				thresholdTrain = open(THRESHOLD_TRAINING_PATH + acronym + "_" + acronyms[weight] + "_thresh_train.txt", "a+")
 				toWrite = str(weightThreshold) + "," + str(1) + "," + str(precision) + "," + str(recall) + "\n"
 				thresholdTrain.write(toWrite)
 				thresholdTrain.close()
