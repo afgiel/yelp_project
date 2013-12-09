@@ -106,33 +106,33 @@ def evaluateWeighted(acronym,acronymw,verbose):
 	if(verbose): print "## %s - Weight: %s - GENERATING EDGE DATA ##\n"%(acronym,acronymw)
 	numPredictedInTest = 0
 	numPredictedNotInTest = 0
-	for edge in predictedLinks:
-		if(Gtest.has_edge(edge[0],edge[1])):
-			numPredictedInTest = numPredictedInTest + 1
-		else:
-			numPredictedNotInTest = numPredictedNotInTest + 1
+	#for edge in predictedLinks:
+	#	if(Gtest.has_edge(edge[0],edge[1])):
+	#		numPredictedInTest = numPredictedInTest + 1
+	#	else:
+	#		numPredictedNotInTest = numPredictedNotInTest + 1
 			
 	numTestInPredicted = 0
 	numTestNotInPredicted = 0
-	for edge in Gtest.edges():
-		u,b = getUserAndBusiness(edge)
-		found = False
-		for link in predictedLinks:
-			if(link[0] == u and link[1] == b):
-				Found = 1
-				break
-		if(found):
-			numTestInPredicted = numTestInPredicted + 1
-		else:
-			numTestNotInPredicted = numTestNotInPredicted + 1
+	#for edge in Gtest.edges():
+	#	u,b = getUserAndBusiness(edge)
+	#	found = False
+	#	for link in predictedLinks:
+	#		if(link[0] == u and link[1] == b):
+	#			Found = 1
+	#			break
+	#	if(found):
+	#		numTestInPredicted = numTestInPredicted + 1
+	#	else:
+	#		numTestNotInPredicted = numTestNotInPredicted + 1
 			
 	numTestInTrain = 0
 	numTestNotInTrain = 0
-	for edge in Gtest.edges():
-		if(Gtrain.has_edge(edge[0],edge[1])):
-			numTestInTrain = numTestInTrain + 1
-		else:
-			numTestNotInTrain = numTestNotInTrain + 1
+	#for edge in Gtest.edges():
+	#	if(Gtrain.has_edge(edge[0],edge[1])):
+	#		numTestInTrain = numTestInTrain + 1
+	#	else:
+	#		numTestNotInTrain = numTestNotInTrain + 1
 	
 	if(verbose): print "## %s - Weight: %s - CALCULATING PRECISION AND RECALL ##\n"%(acronym,acronymw)
 	allInternalLinks = set()

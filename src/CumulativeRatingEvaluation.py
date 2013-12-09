@@ -49,11 +49,17 @@ for x in diffRatings:
 	yaxis.append(diffRatings[x])
 
 print diffRatings
+sum = sum(yaxis)
+prob = []
+for x in diffRatings:
+	prob.append((float(diffRatings[x])*100)/sum)
+
+print prob
 
 plt.figure(1)
 ax = plt.subplot(111)
 plt.ylabel('Number of Links')
 plt.xlabel('Difference in Rating of Predicted and Actual Test Links')
 plt.title('Distibution of difference in rating between predicted and actual test links')
-ax.plot(xaxis,yaxis,marker = 'o',linestyle = '--')
+ax.plot(xaxis,prob,marker = 'o',linestyle = '--')
 plt.show()
