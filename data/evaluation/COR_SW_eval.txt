@@ -1,19 +1,23 @@
-Num Predicted Edges,4364
+Num Predicted Edges,830
 Num Predicted Edges In Test,0
-Num Predicted Edges Not In Test,4364
+Num Predicted Edges Not In Test,0
 Num Test Edges In Predicted,0
-Num Test Edges Not In Predicted,2187
-Num Test Edges In Train,2187
+Num Test Edges Not In Predicted,0
+Num Test Edges In Train,0
 Num Test Edges Not In Train,0
 Num Train Users,652
-Num Test Users,652
-Num Predicted Users,222
+Num Test Users,828
+Num Predicted Users,56
 Num Train Businesses,333
-Num Test Businesses,333
-Num Predicted Businesses,133
-Num Train Users In Test,652
-Num Train Businesses In Test,133
-Num Predicted Users In Train,222
-Num Predicted Businesses In Train,133
-Num Predicted Users In Test,222
-Num Predicted Businesses In Test,133
+Num Test Businesses,348
+Num Predicted Businesses,105
+Num Train Users In Test,66
+Num Train Businesses In Test,105
+Num Predicted Users In Train,56
+Num Predicted Businesses In Train,105
+Num Predicted Users In Test,17
+Num Predicted Businesses In Test,73
+Num Test Internal Edges,13
+Num Actual Predicted Internal Edges,6
+Precision,0.00722891566265
+Recall,0.461538461538
