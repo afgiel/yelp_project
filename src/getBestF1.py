@@ -4,7 +4,7 @@ FIFTY_SPLIT_THRESHOLD_PATH = "../data/threshold_training/"
 
 WEIGHTS_ACR = ["SW", "JW", "DW", "RSW", "RJW", "RDW", "RLSW"]
 
-SCHOOL_ACR = ["STA"]
+SCHOOL_ACR = ["CMU"]
 
 def getF1(precision, recall):
 	numer = 2 * precision * recall
