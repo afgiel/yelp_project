@@ -4,7 +4,7 @@ FIFTY_SPLIT_THRESHOLD_PATH = "../data/threshold_training/"
 
 WEIGHTS_ACR = ["SW", "JW", "DW", "RSW", "RJW", "RDW", "RLSW"]
 
-SCHOOL_ACR = ["CMU"]
+SCHOOL_ACR = ["COR", "PRC", "UMC", "UIC", "CMU"]
 
 def getF1(precision, recall):
 	numer = 2 * precision * recall
@@ -33,7 +33,7 @@ def writeToFileForSchool(results, schoolAcr):
 	fileToWrite = open(FIFTY_SPLIT_THRESHOLD_PATH + "BEST_" + schoolAcr + ".txt", "w+")
 	fileToWrite.write("Weight, Tau, F1, P, R\n")
 	for line in results:
-		toWrite = str(line[0]) + "," + str(line[1]) + "," + str(line[2]) + "," + str(line[3]) + "," + str(line[4]) + "," + "\n"
+		toWrite = str(line[0]) + "," + str(line[1]) + "," + str(line[2]) + "," + str(line[3]) + "," + str(line[4]) + "\n"
 		fileToWrite.write(toWrite)
 	fileToWrite.close()
 
