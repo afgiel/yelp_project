@@ -25,7 +25,7 @@ MODULE_RATING_PREDICTION = False
 
 # SCHOOLS TO BE USED
 ALL_SCHOOLS = False
-SCHOOLS = ['Carnegie Mellon University']
+SCHOOLS = ['University of Illinois - Urbana-Champaign']
 
 # TRAIN, VALIDATION AND TEST PERCENT
 PERCENT_TRAIN = .5
