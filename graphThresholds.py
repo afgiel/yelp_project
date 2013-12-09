@@ -52,13 +52,14 @@ plt.title("Precisions at various thresholds for each method")
 plt.xlabel("Thresholds")
 plt.ylabel("Precisions")
 
-#legend = plt.legend(loc='upper right', shadow=True)
+legend = plt.legend(loc='upper right', shadow=True)
 
-#plt.show()
-#plotThresholds(thresholds, recallsList, colors, algoNames)
-#plt.title("Recalls at various thresholds for each method")
-#plt.xlabel("Thresholds")
-#plt.ylabel("Recalls")
-legend = plt.legend(loc='upper left', shadow=True)
 plt.show()
+
+# plotThresholds(thresholds, recallsList, colors, algoNames)
+# plt.title("Recalls at various thresholds for each method")
+# plt.xlabel("Thresholds")
+# plt.ylabel("Recalls")
+# legend = plt.legend(loc='upper left', shadow=True)
+# plt.show()
 
