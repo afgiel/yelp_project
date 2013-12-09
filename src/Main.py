@@ -25,7 +25,7 @@ MODULE_RATING_PREDICTION = False
 
 # SCHOOLS TO BE USED
 ALL_SCHOOLS = False
-SCHOOLS = ['Carnegie Mellon University']
+SCHOOLS = ['University of Maryland - College Park']
 
 # TRAIN, VALIDATION AND TEST PERCENT
 PERCENT_TRAIN = .5
